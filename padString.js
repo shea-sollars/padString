@@ -1,4 +1,4 @@
-var padString = module.exports = function (targetString, maxLength, paddingString, append) {
+var padString = module.exports = function (targetString, maxLength, paddingString, paddingType) {
 	// If string is already at/over the limit
 	if (targetString.length >= maxLength) {
 		// Just return the string as is
@@ -29,25 +29,50 @@ var padString = module.exports = function (targetString, maxLength, paddingStrin
 	// Make the padding sufficient enough
 	paddingString = paddingString.repeat(repeatTimes);
 
-	// Appending...
-	if (append) {
-		// Just add the padding and cut off the excess
-		return (targetString + paddingString).slice(0, maxLength);
-	};
-
-	// Figure out if and how much to trim
+	// Figure out how much to trim if any
 	var trimAmount = (paddingString.length + targetString.length) - maxLength;
 
-	// Trim if needed and prepend the padding
-	return paddingString.slice(0, paddingString.length - trimAmount) + targetString;
+	// Might aswell just trim it now
+	paddingString = paddingString.slice(0, paddingString.length - trimAmount);
+
+	if (paddingType) {
+		// Typecast
+		paddingType = String(paddingType);
+		// Diversify our paddingType option a little bit
+		paddingType = paddingType.toLowerCase();
+	};
+
+	// Center the targetString
+	if (paddingType == 'both') {
+		// Half of our padding string
+		var paddingLength = Math.floor(paddingString.length / 2);
+		// The left side
+		var leftPadding = paddingString.slice(0, paddingLength);
+		// Right side gets the odd man out 
+		var rightPadding = paddingString.slice(paddingLength);
+		// Cut/paste/return
+		return leftPadding + targetString + rightPadding;
+	}
+	else if (paddingType == 'left') {
+		// Prepend the padding
+		return paddingString + targetString;
+	};
+
+	// Append the padding (default)
+	return targetString + paddingString;
 };
 
 // padStart polyfill
 String.prototype.padStart = function (maxLength, paddingString) {
-	return padString(this, maxLength, paddingString);
+	return padString(this, maxLength, paddingString, 'left');
+};
+
+// padBoth
+String.prototype.padBoth = function (maxLength, paddingString) {
+	return padString(this, maxLength, paddingString, 'both');
 };
 
 // padEnd polyfill
 String.prototype.padEnd = function (maxLength, paddingString) {
-	return padString(this, maxLength, paddingString, true);
+	return padString(this, maxLength, paddingString);
 };
