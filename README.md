@@ -69,3 +69,7 @@ Attaches to `String.prototype` and wraps `padString`, with the default `paddingT
 ```
 'test'.padEnd(10, '0'); // test000000
 ```
+
+## Additional Information
+* [padEnd](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd)
+* [padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
