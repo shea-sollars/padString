@@ -1,4 +1,9 @@
 # String Padding
+## Install
+```
+npm install padstring
+```
+
 ## Module
 ### padString
 #### Description

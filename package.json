@@ -1,0 +1,27 @@
+{
+  "name": "padstring",
+  "version": "1.0.0",
+  "description": "String padding function with left, right, and both options. Also includes padStart and padEnd pollyfills, with padBoth as a bonus.",
+  "main": "padString.js",
+  "scripts": {
+    "test": "padString"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shea-sollars/padString.git"
+  },
+  "keywords": [
+    "padString",
+    "padding",
+    "string",
+    "padStart",
+    "padBoth",
+    "padEnd"
+  ],
+  "author": "Shea Sollars",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shea-sollars/padString/issues"
+  },
+  "homepage": "https://github.com/shea-sollars/padString#readme"
+}
