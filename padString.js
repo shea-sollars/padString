@@ -10,7 +10,7 @@ var padString = module.exports = function (targetString, length, padding, append
 		padding = ' ';
 	}
 	else {
-		// Ensure padding with a String
+		// Ensure padding is a String
 		padding = String(padding);
 	};
 
@@ -38,7 +38,7 @@ var padString = module.exports = function (targetString, length, padding, append
 	// Figure out if and how much to trim
 	var trimAmount = (padding.length + targetString.length) - length;
 
-	// Trim if need and prepend the padding
+	// Trim if needed and prepend the padding
 	return padding.slice(0, padding.length - trimAmount) + targetString;
 };
 
