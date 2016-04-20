@@ -1,4 +1,4 @@
-var padString = require('padString.js');
+var padString = require('./padString.js');
 
 var test = "test";
 
