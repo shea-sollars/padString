@@ -1,53 +1,53 @@
-var padString = module.exports = function (targetString, length, padding, append) {
+var padString = module.exports = function (targetString, maxLength, paddingString, append) {
 	// If string is already at/over the limit
-	if (targetString.length >= length) {
+	if (targetString.length >= maxLength) {
 		// Just return the string as is
 		return targetString;
 	};
 
-	if (!padding) {
+	if (!paddingString) {
 		// Default padding is a space
-		padding = ' ';
+		paddingString = ' ';
 	}
 	else {
 		// Ensure padding is a String
-		padding = String(padding);
+		paddingString = String(paddingString);
 	};
 
 	// If padding already brings us over our limit
-	if (padding.length + targetString.length >= length) {
+	if (paddingString.length + targetString.length >= maxLength) {
 		// No need to repeat padding
 		var repeatTimes = 1;
 	}
 	else {
 		// Figure out how many chars until we reach the limit
-		var repeatTimes = length - targetString.length;
+		var repeatTimes = maxLength - targetString.length;
 		// Then figure out how many times we need to repeat the padding
-		repeatTimes = Math.ceil(repeatTimes / padding.length);
+		repeatTimes = Math.ceil(repeatTimes / paddingString.length);
 	};
 
 	// Make the padding sufficient enough
-	padding = padding.repeat(repeatTimes);
+	paddingString = paddingString.repeat(repeatTimes);
 
 	// Appending...
 	if (append) {
 		// Just add the padding and cut off the excess
-		return (targetString + padding).slice(0, length);
+		return (targetString + paddingString).slice(0, maxLength);
 	};
 
 	// Figure out if and how much to trim
-	var trimAmount = (padding.length + targetString.length) - length;
+	var trimAmount = (paddingString.length + targetString.length) - maxLength;
 
 	// Trim if needed and prepend the padding
-	return padding.slice(0, padding.length - trimAmount) + targetString;
+	return paddingString.slice(0, paddingString.length - trimAmount) + targetString;
 };
 
 // padStart polyfill
-String.prototype.padStart = function (length, padding) {
-	return padString(this, length, padding);
+String.prototype.padStart = function (maxLength, paddingString) {
+	return padString(this, maxLength, paddingString);
 };
 
 // padEnd polyfill
-String.prototype.padEnd = function (length, padding) {
-	return padString(this, length, padding, true);
+String.prototype.padEnd = function (maxLength, paddingString) {
+	return padString(this, maxLength, paddingString, true);
 };
